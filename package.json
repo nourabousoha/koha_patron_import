@@ -1,0 +1,14 @@
+{
+  "name": "koha_patron_csv",
+  "version": "1.0.0",
+  "description": "traitement des liste d'utilsateurs de la biblio pour import dans koha",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nouredine Sghir",
+  "license": "ISC",
+  "dependencies": {
+    "node-csv": "^0.1.2"
+  }
+}
