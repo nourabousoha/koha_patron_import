@@ -26,7 +26,14 @@ getopt.showHelp();
 process.exit();
 }
 else{
-  data = fs.readFileSync(inputFile);
+  try {
+data = fs.readFileSync(inputFile,'utf8');
+
+} catch(err) {
+console.log(colors.red('Le fichier  ' + inputFile + ' n\'existe pas ' + err ));
+process.exit();
+}
+  
 }
 
 var themeCode = function (theme) {
@@ -72,8 +79,11 @@ let transform = function (err, output) {
   fs.writeFile(outputFile,allQuoted(output).join('\n'),  function(err) {
    if (err) {
       return console.error(err);
-  }});
+  }else{
+    console.log(colors.green('fichier transformé et enrgisté en ' + outputFile));
+  }
+});
 }
-console.log('Transformation des fichiers'.green)
+
 parse(data, transform);
 
