@@ -1,13 +1,29 @@
 const parse = require('csv-parse');
 const fs = require("fs");
-
-const FILE_NAME = 'usagersM.csv';
+const colors = require('colors');
+// node-getopt oneline example.
+const opt = require('node-getopt').create([
+  ['S' , 'in=ARG'  , 'Fichiers à traiter'],
+  ['S' , 'out=ARG'  , 'Fichier de sortie'],
+  ['h' , 'help'                , 'display this help'],
+  ['v' , 'version'             , 'show version']
+])              // create Getopt instance
+.bindHelp()     // bind option 'help' to default action
+.parseSystem(); // parse command line
 const indFonc = 6;
 const indDisc = 8;
 const indOrg = 9;
 const indCode =12;
 const indTheme =7;
-let input = fs.readFileSync(FILE_NAME);
+
+let input = opt.options.in;
+if (input === undefined ){
+console.log('Usage node transform.js -in "input_file" '.red);
+process.exit();
+}
+else{
+input = fs.readFileSync(input);
+}
 
 var themeCode = function (theme) {
   if (theme === 'Sciences médicales et pharmaceutiques') {
@@ -54,5 +70,6 @@ let transform = function (err, output) {
       return console.error(err);
   }});
 }
+console.log('Transformation des fichiers'.green)
 parse(input, transform);
 
