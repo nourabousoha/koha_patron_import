@@ -2,27 +2,31 @@ const parse = require('csv-parse');
 const fs = require("fs");
 const colors = require('colors');
 // node-getopt oneline example.
-const opt = require('node-getopt').create([
+const getopt = require('node-getopt').create([
   ['S' , 'in=ARG'  , 'Fichiers à traiter'],
   ['S' , 'out=ARG'  , 'Fichier de sortie'],
   ['h' , 'help'                , 'display this help'],
   ['v' , 'version'             , 'show version']
-])              // create Getopt instance
-.bindHelp()     // bind option 'help' to default action
-.parseSystem(); // parse command line
+]);              // create Getopt instance
+     // bind option 'help' to default action
+getopt.setHelp(
+  "Usage: node transform.js --in 'input file name --out 'output file name ' ".blue );
+getopt.bindHelp();
+let opt =getopt.parseSystem(); // parse command line
 const indFonc = 6;
 const indDisc = 8;
 const indOrg = 9;
 const indCode =12;
 const indTheme =7;
-
-let input = opt.options.in;
-if (input === undefined ){
-console.log('Usage node transform.js -in "input_file" '.red);
+let data;
+let inputFile = opt.options.in;
+let outputFile = opt.options.out ;
+if (undefined === inputFile  | outputFile === undefined ){
+getopt.showHelp();
 process.exit();
 }
 else{
-input = fs.readFileSync(input);
+  data = fs.readFileSync(inputFile);
 }
 
 var themeCode = function (theme) {
@@ -65,11 +69,11 @@ let transform = function (err, output) {
 
  // console.log((allQuoted(output)).join('\n'));
 //}
-  fs.writeFile('usagersM_transformed.csv',allQuoted(output).join('\n'),  function(err) {
+  fs.writeFile(outputFile,allQuoted(output).join('\n'),  function(err) {
    if (err) {
       return console.error(err);
   }});
 }
 console.log('Transformation des fichiers'.green)
-parse(input, transform);
+parse(data, transform);
 
