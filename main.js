@@ -4,7 +4,7 @@ const colors = require('colors');
 const trans = require('./transform')
 // node-getopt oneline example.
 const getopt = require('node-getopt').create([
-  ['S' , 'in=ARG'  , 'Fichiers à traiter'],
+  ['S' , 'in=ARG'  , 'Fichier à traiter'],
   ['S' , 'out=ARG'  , 'Fichier de sortie'],
   ['h' , 'help'                , 'display this help'],
   ['v' , 'version'             , 'show version']
