@@ -1,4 +1,7 @@
 const fs = require("fs");
+const Promis = require('bluebird');
+
+Promis.promisifyAll(fs);
 const indFonc = 6;
 const indDisc = 8;
 const indOrg = 9;
@@ -31,22 +34,24 @@ let allQuoted = function (myArray) {
     return myArray;
 
 }
+let change = function(dataArray){
+    
+    dataArray[0].push("patron_attributes");
+    dataArray[0].push("categorycode");
+    dataArray[0].push("branchcode");
+    for (let i = 1; i < dataArray.length; i++) {
+        dataArray[i].push('FONC:' + dataArray[i][indFonc] + ',DISC:' + dataArray[i][indDisc] + ',ORG:' + dataArray[i][indOrg] + ',CODE:' + dataArray[i][indCode]);
+        dataArray[i].push("ADULT");
+        dataArray[i].push(themeCode(dataArray[i][indTheme]));
+  
+}}
 let transform = function (outputFile) {
     return function(err, output){
-    output[0].push("patron_attributes");
-    output[0].push("categorycode");
-    output[0].push("branchcode");
-    for (let i = 1; i < output.length; i++) {
-        output[i].push('FONC:' + output[i][indFonc] + ',DISC:' + output[i][indDisc] + ',ORG:' + output[i][indOrg] + ',CODE:' + output[i][indCode]);
-        output[i].push("ADULT");
-        output[i].push(themeCode(output[i][indTheme]));
-    }
+    change(output);
 
-
-    fs.writeFile(outputFile, allQuoted(output).join('\n'), function (err) {
-        if (err) {
-            return console.error(err);
-        }
+    fs.writeFileAsync(outputFile,allQuoted(output).join('\n') ).catch( function (err) { //allQuoted(output).join('\n')
+                   return console.error(err);
+       
     });
     }
 }
