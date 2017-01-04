@@ -1,7 +1,7 @@
 const parse = require('csv-parse');
 const fs = require("fs");
 const colors = require('colors');
-const transformed = require('./transform');
+const transform = require('./transform');
 const Promis = require('bluebird');
 // node-getopt oneline example.
 const getopt = require('node-getopt').create([
@@ -17,25 +17,27 @@ getopt.setHelp(
   "Usage: node transform.js --in 'input file name --out 'output file name ' ".blue);
 getopt.bindHelp();
 let opt = getopt.parseSystem(); // parse command line
-
+let err
 let data;
 let inputFile = opt.options.in;
 let outputFile = opt.options.out;
-let transform;
+
 if (undefined === inputFile | outputFile === undefined) {
   getopt.showHelp();
   process.exit();
 }
 else {
   try {
-    data = fs.readFileAsync(inputFile, 'utf8')
-      .then(data)
+    fs.readFileAsync(inputFile, 'utf8')
+      .then(function(data){
+         parse(data, transform(outputFile));
+      })
       .catch(
       // Log the rejection reason
       function (reason) {
         console.log('Handle rejected promise (' + reason + ') here.');
       });
-    transform = transformed(outputFile);
+   
 
   } catch (err) {
     console.log(colors.red('Le fichier  ' + inputFile + ' n\'existe pas ' + err));
@@ -43,5 +45,5 @@ else {
   }
 }
 
-parse(data, transform);
+
 
