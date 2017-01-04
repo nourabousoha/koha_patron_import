@@ -7,7 +7,7 @@ const indDisc = 8;
 const indOrg = 9;
 const indCode = 12;
 const indTheme = 7;
-// test some git problems
+
 let themeCode = function (theme) {
     if (theme === 'Sciences médicales et pharmaceutiques') {
         return 'SMP'
