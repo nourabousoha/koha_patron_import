@@ -1,0 +1,4 @@
+N° ,Nom,Prénom,Mail,Login,Mot de passe,Profession,Thématique,Discipline,Organisme de rattachement,Ville,Date dépôt dossier, CIN/  Passeport,
+1,Mohammed,Ali,ka.M.ali2540@yahoo.fr,kaddafi.ali,imist01,Doctorant,Sciences médicales et pharmaceutiques,Odontologie, ,Rabat,02/02/2011,P. : C 0h0fh61hfg1 OR,
+2,Edison,Thomas,T.Edison@gmail.com,elamri.adil,imist02,Adiministrateur,Sciences juridiques économiques et de gestion,Management des organisations,CNRST,Rabat,02/03/2011, CIN : AB 95870,
+3,Hawkins,Bassima,bassima.Hawkins@gmail.com,chami.bassima,imist03,Chirugien dentiste enseignante,Sciences médicales et pharmaceutiques,Chirurgie dentaire,Univ. Mohamed V Souissi- ,Rabat,02/04/2011, CIN : CD 182507,

@@ -4,7 +4,7 @@
   "description": "traitement des liste d'utilsateurs de la biblio pour import dans koha",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node main  --in ./asset/input.txt --out  ./asset/result.csv"
   },
   "author": "Nouredine Sghir",
   "license": "ISC",
