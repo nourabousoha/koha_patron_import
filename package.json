@@ -9,6 +9,7 @@
   "author": "Nouredine Sghir",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.4.7",
     "colors": "^1.1.2",
     "csv": "^1.1.0",
     "minimist": "^1.2.0",

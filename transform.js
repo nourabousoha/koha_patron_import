@@ -1,4 +1,7 @@
 const fs = require("fs");
+const Promis = require('bluebird');
+
+Promis.promisifyAll(fs);
 const indFonc = 6;
 const indDisc = 8;
 const indOrg = 9;
@@ -43,10 +46,9 @@ let transform = function (outputFile) {
     }
 
 
-    fs.writeFile(outputFile, allQuoted(output).join('\n'), function (err) {
-        if (err) {
-            return console.error(err);
-        }
+    fs.writeFileAsync(outputFile, allQuoted(output).join('\n')).catch( function (err) {
+                   return console.error(err);
+       
     });
     }
 }
